@@ -102,16 +102,16 @@ function run() {
   const { dispatch, subscribe, unsubscribe } = createState(snakeReducer, initialState);
   
   function handleKeyPress(event) {
-    if (event.key === "w") dispatch({ type: "CHANGE_DIR", payload: UP });
-    if (event.key === "s") dispatch({ type: "CHANGE_DIR", payload: DOWN });
-    if (event.key === "d") dispatch({ type: "CHANGE_DIR", payload: RIGHT });
-    if (event.key === "a") dispatch({ type: "CHANGE_DIR", payload: LEFT });
+    if (event.key === "w" || event.key === "ArrowUp") dispatch({ type: "CHANGE_DIR", payload: UP });
+    if (event.key === "s" || event.key === "ArrowDown") dispatch({ type: "CHANGE_DIR", payload: DOWN });
+    if (event.key === "d" || event.key === "ArrowRight") dispatch({ type: "CHANGE_DIR", payload: RIGHT });
+    if (event.key === "a" || event.key === "ArrowLeft") dispatch({ type: "CHANGE_DIR", payload: LEFT });
   }
 
   window.removeEventListener("keydown", restart);
   window.addEventListener("keydown", handleKeyPress);
 
-  let tick = setInterval(() => dispatch({ type: "MOVE" }), 80);
+  let tick = setInterval(() => dispatch({ type: "MOVE" }), 100);
 
   function drawSnake(state) {
     const { didCollide, pos, food } = state;
